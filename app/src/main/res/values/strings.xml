@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MySelfChat</string>
+
+    <string name="message_text">message text</string>
+    <string name="message_user_name">username</string>
+    <string name="message_time">11:30 PM</string>
+    <string name="SEND">SEND</string>
+    <string name="enter_message">Enter Message</string>
+</resources>
