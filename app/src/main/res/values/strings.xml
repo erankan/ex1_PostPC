@@ -6,4 +6,5 @@
     <string name="message_time">11:30 PM</string>
     <string name="SEND">SEND</string>
     <string name="enter_message">Enter Message</string>
+    <string name="delete">Delete Message</string>
 </resources>

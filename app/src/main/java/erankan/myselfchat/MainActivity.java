@@ -12,10 +12,11 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyAdapter.MyItemClick, MyFragment.MessageDeletedListener{
 
     private static final String[] senders = {"Eran", "Lior", "Adi"};
     private int num;
+    private MyAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         myRec.setLayoutManager(myManger);
 
         final List<MyMessage> myListMessage = new ArrayList<>();
-        final MyAdapter adapter = new MyAdapter(myListMessage);
+        adapter = new MyAdapter(this, myListMessage);
 
         // set data adapter to RecyclerView
         myRec.setAdapter(adapter);
@@ -46,15 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
                     // add a new message to the list
                     MyMessage msg = new MyMessage(senders[num], sentMessage);
-                    myListMessage.add(msg);
+                    adapter.addMessage(msg);
 
-                    int newMsgPosition = myListMessage.size() - 1;
-
-                    // notify recycler view insert one new data
-                    adapter.notifyItemInserted(newMsgPosition);
-
-                    // scroll RecyclerView to the last message
-                    myRec.scrollToPosition(newMsgPosition);
+                    myRec.scrollToPosition(myListMessage.size()-1);
 
                     // empty the input edit text box
                     msgInput.setText("");
@@ -65,5 +60,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    @Override
+    public void onItemClick(MyMessage message) {
+        MyFragment fragment = MyFragment.newInstance(message);
+        getSupportFragmentManager().beginTransaction().add(R.id.frame, fragment).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void onMessageDeleted(MyMessage msg) {
+        adapter.removeItem(msg);
+        getSupportFragmentManager().popBackStack();
     }
 }

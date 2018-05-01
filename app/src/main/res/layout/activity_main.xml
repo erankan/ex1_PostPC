@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,36 +7,39 @@
     tools:context=".MainActivity">
 
 
+
+    <Button
+        android:id="@+id/my_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/SEND" />
+
+    <EditText
+        android:id="@+id/chat_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/my_button"
+        android:layout_toLeftOf="@+id/my_button"
+        android:hint="@string/enter_message"
+        android:inputType="textLongMessage|textShortMessage"
+        android:maxLines="3"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycle"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scrollbars="vertical" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/my_button"/>
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#26000000"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/chat_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_weight="1"
-            android:hint="@string/enter_message"
-            android:imeOptions="actionSend"
-            android:inputType="textAutoCorrect"
-            />
+    </FrameLayout>
 
-        <Button
-            android:id="@+id/my_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/SEND" />
 
-    </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

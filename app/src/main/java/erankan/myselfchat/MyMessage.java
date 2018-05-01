@@ -1,17 +1,24 @@
 package erankan.myselfchat;
 
+
 import java.util.Date;
 
 public class MyMessage {
 
     private String sender;
     private String content;
-    private String timeStamp;
+    private Date timeStamp;
 
     public MyMessage(String sender, String content) {
         this.sender = sender;
         this.content = content;
-        this.timeStamp = new Date().toString();
+        this.timeStamp = new Date();
+    }
+
+    public MyMessage(String sender, String content, String date){
+        this.sender = sender;
+        this.content = content;
+        this.timeStamp = new Date(date);
     }
 
     public String getSender() {
@@ -22,7 +29,16 @@ public class MyMessage {
         return content;
     }
 
-    public String getTimestamp() {
+    public Date getTimestamp() {
         return timeStamp;
+    }
+
+    public String getMessage(){
+        return sender + "-" + content + "-" + timeStamp.toString();
+    }
+
+
+    public boolean equals(MyMessage msg){
+        return getMessage().equals(msg.getMessage());
     }
 }
